@@ -35,12 +35,12 @@
   "main": "postcss.config.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Rafli-ri/al-quran-reactjs.git"
+    "url": "git+https://github.com/EraliTemirov/Qur-onim"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Rafli-ri/al-quran-reactjs/issues"
+    "url": "https://github.com/EraliTemirov/Qur-onim/issues"
   },
-  "homepage": "https://github.com/Rafli-ri/al-quran-reactjs#readme"
+  "homepage": "https://github.com/EraliTemirov/Qur-onim#readme"
 }

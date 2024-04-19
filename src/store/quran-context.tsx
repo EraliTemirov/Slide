@@ -111,6 +111,7 @@ export const AlquranContextProvider = ({ children }: ChildProps) => {
   );
 };
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const useAlquran = () => {
   return useContext(AlquranContext);
 };

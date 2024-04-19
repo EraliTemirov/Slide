@@ -24,7 +24,7 @@ const Footer: React.FC<{ className: string }> = ({ className }) => {
       </div>
       <div className="sm:block hidden px-4 py-3 bg-[#656d4a]">
         <span className="text-sm text-slate-300 flex text-center font-semibold items-center justify-center">
-          © 2023 <a href="#">Quran App</a>. All Rights Reserved.
+          © 2023 <a href="#">Quran App</a>. Albison info
         </span>
       </div>
     </footer>
