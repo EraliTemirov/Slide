@@ -58,6 +58,7 @@ const AudioPlayer: React.FC<CustomAudioPlayerProps> = ({ audioSrc }) => {
         });
 
         audioRef.current.removeEventListener("timeupdate", () => {
+          // eslint-disable-next-line react-hooks/exhaustive-deps
           setCurrentTime(audioRef.current!.currentTime);
         });
       }

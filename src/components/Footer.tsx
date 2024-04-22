@@ -13,7 +13,7 @@ const Footer: React.FC<{ className: string }> = ({ className }) => {
     <footer className={`w-full bottom-0 pt-8 ${className} `}>
       <div className=" bg-white p-7 border shadow-md md:mt-14 flex justify-between items-center">
         <h1 className="font-semibold text-[18px] text-slate-600">
-          Al-Quran App
+          Magic App
         </h1>
         <button
           onClick={scrollToTop}
@@ -24,7 +24,7 @@ const Footer: React.FC<{ className: string }> = ({ className }) => {
       </div>
       <div className="sm:block hidden px-4 py-3 bg-[#656d4a]">
         <span className="text-sm text-slate-300 flex text-center font-semibold items-center justify-center">
-          © 2023 <a href="#">Quran App</a>. Albison info
+          © 2024 <a href="#">Magic App</a>.T
         </span>
       </div>
     </footer>

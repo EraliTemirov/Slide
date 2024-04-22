@@ -18,7 +18,7 @@ const ListsDetalSurah: React.FC = () => {
           `https://equran.id/api/v2/surat/${nomor}`
         );
         const { data } = await responseDetail.json();
-        // console.log(data);
+        console.log(data);
         quranDispatch({ type: ActionTypes.GET_SURAH_DETAIL, payload: data });
       } catch (error) {
         quranDispatch({ type: ActionTypes.FETCH_FAILED, payload: error });

@@ -78,7 +78,7 @@ const HeaderDetail: React.FC<{ onShow: () => void }> = ({ onShow }) => {
           <Link to={"/"}>
             <div className="inline-flex items-center hover:text-slate-800">
               <IoChevronBack size={20} className="mr-1" />
-              Kembali
+              Back to
             </div>
           </Link>
           <div>

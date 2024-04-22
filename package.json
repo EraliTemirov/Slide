@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "axios": "^1.6.8",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.12.0",
@@ -35,12 +36,12 @@
   "main": "postcss.config.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/EraliTemirov/Qur-onim"
+    "url": "git+https://github.com/EraliTemirov/Slide"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/EraliTemirov/Qur-onim/issues"
+    "url": "https://github.com/EraliTemirov/Slide/issues"
   },
-  "homepage": "https://github.com/EraliTemirov/Qur-onim#readme"
+  "homepage": "https://github.com/EraliTemirov/Slide#readme"
 }

@@ -1,5 +1,4 @@
 import React from "react";
-import frame from "../../assets/frame.png";
 import { Link } from "react-router-dom";
 
 interface SurahType {
@@ -14,11 +13,11 @@ interface SurahType {
 
 const ItemsSurah: React.FC<SurahType> = ({
   nomor,
-  namaLatin,
-  nama,
-  arti,
-  tempatTurun,
-  jumlahAyat,
+  // namaLatin,
+  // nama,
+  // arti,
+  // tempatTurun,
+  // jumlahAyat,
   surahs,
 }) => {
   return (
@@ -33,21 +32,7 @@ const ItemsSurah: React.FC<SurahType> = ({
               <h3 className="col-start-1 row-start-1 text-[11px] md:text-sm font-bold text-slate-500">
                 {nomor}
               </h3>
-              <img src={frame} alt="" className="col-start-1 row-start-1" />
-            </div>
-            <div className="mx-5 grow">
-              <h4 className="font-bold sm:font-semibold text-gray-700 text-sm sm:text-base ">
-                {namaLatin}
-              </h4>
-              <div className="text-gray-600 text-[13px] font-normal text-ellipsis ">
-                {jumlahAyat} - {arti}
-              </div>
-            </div>
-            <div className="mx-2 text-center">
-              <h4 className="text-sm font-semibold text-gray-700 md:text-xl xl:font-bold font-noto">
-                {nama}
-              </h4>
-              <div className="text-xs font-extralight">{tempatTurun}</div>
+              
             </div>
           </Link>
         </div>
