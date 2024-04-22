@@ -15,7 +15,7 @@ const ListsDetalSurah: React.FC = () => {
       try {
         quranDispatch({ type: ActionTypes.LOADING });
         const responseDetail = await fetch(
-          `https://equran.id/api/v2/surat/${nomor}`
+          `https://api.magicslide.uz/api/v1/search?page=1`
         );
         const { data } = await responseDetail.json();
         console.log(data);

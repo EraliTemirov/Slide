@@ -1,5 +1,3 @@
-// Header.tsx
-
 import React, {  useState } from "react";
 import Search from "./Search";
 
@@ -9,12 +7,7 @@ interface HeaderProps {
 
 const Header: React.FC<HeaderProps> = (props) => {
   const { userData } = props;
- console.log(userData);
- 
-
-
-  
-
+//  console.log(userData);
   const [isOpen, setIsOpen] = useState(false)
 
   const toggleNavbar = () => {
@@ -75,6 +68,7 @@ const Header: React.FC<HeaderProps> = (props) => {
        <ul className="pt-1 bg-white max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'">
         <li>Balance: {userData?.data.balance}</li>
         <li>Name: {userData?.data.name}</li>
+        <button className="p-1 ">Log out</button>
        </ul>
       </div>
     </nav>
