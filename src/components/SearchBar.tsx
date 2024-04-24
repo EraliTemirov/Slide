@@ -1,24 +1,28 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import mainApiInstance from "./mainApiInstance";
 
 export const SearchBar = ({ setResults }: { setResults: (results: any[]) => void }): JSX.Element => {
+
   const [input, setInput] = useState<string>("");
 
   const fetchData = async (value: string): Promise<void> => {
     try {
       const response = await mainApiInstance.get(
-        `/prezentations/search?page=${1}&limit=10&search=new`
+        `/prezentations/search?page=${1}&limit=12&search=${value}`
       );
-      const json = response.data;
-    //   console.log(response);
-      const results = json.filter((user: any) => {
+      const data = response.data.data;
+      console.log(response.data);
+      
+      const results = data.filter((user: any) => {
         return (
           value &&
           user &&
           user.name &&
           user.name.toLowerCase().includes(value)
         );
+       
       });
+      console.log(results);
       setResults(results);
     } catch (error) {
       console.error(error);
@@ -30,9 +34,15 @@ export const SearchBar = ({ setResults }: { setResults: (results: any[]) => void
     fetchData(value);
   };
 
+
+  useEffect(() => {  
+    fetchData("new");  
+  }, []);
+
   return (
     <div className="input-wrapper">
-       <form className="flex items-center">
+       <form onSubmit={(e) => { e.preventDefault();}}
+  className="flex items-center">
         <label htmlFor="search" className="sr-only">
           Search
         </label>

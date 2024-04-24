@@ -4,6 +4,7 @@ import mainApiInstance from "../components/mainApiInstance";
 import { SearchBar } from "../components/SearchBar";
 import { SearchResultsList } from "../components/SearchResultsList";
 
+
 const HomePage: React.FC = () => {
   const [results, setResults] = useState([]);
   const [userData, setUserData] = useState<any>(null);
@@ -32,7 +33,7 @@ const HomePage: React.FC = () => {
         <SearchBar setResults={setResults}  />
         {results && results.length > 0 && <SearchResultsList results={results} />}
       </div>
-      
+    
     </>
   );
 };
