@@ -1,11 +1,14 @@
 import React, {  useState } from "react";
-import Search from "./Search";
+import  mainApiInstance from "./mainApiInstance";
+import { useNavigate } from "react-router-dom";
 
 interface HeaderProps {
   userData: any;
 }
 
 const Header: React.FC<HeaderProps> = (props) => {
+
+  const navigate= useNavigate();
   const { userData } = props;
 //  console.log(userData);
   const [isOpen, setIsOpen] = useState(false)
@@ -14,10 +17,25 @@ const Header: React.FC<HeaderProps> = (props) => {
     setIsOpen(!isOpen)
   }
 
+
+
+  async function handleLogout() {
+    try {
+      const res = await mainApiInstance.get("/auth/logout");
+      if (res.status === 200) {
+        console.log(res)
+        alert(res?.data?.message);
+        navigate("/");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   return (
     <>
      <nav className="bg-[white] sticky z-20 top-0">
-      <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
+      <div className='max-w-8xl mx-auto px-4 sm:px-6 lg:px-8'>
         <div className='flex items-center justify-between h-16'>
           <div className='flex items-center'>
             <a href='#' className='flex items-center'>
@@ -65,17 +83,13 @@ const Header: React.FC<HeaderProps> = (props) => {
         </div>
       </div>
       <div className={` ${isOpen ? 'block' : 'hidden'}`}>
-       <ul className="pt-1 bg-white max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'">
+       <ul className="pt-1 bg-white max-w-8xl mx-auto px-4 sm:px-6 lg:px-8'">
         <li>Balance: {userData?.data.balance}</li>
         <li>Name: {userData?.data.name}</li>
-        <button className="p-1 ">Log out</button>
+        <button onClick={handleLogout} className="p-1 ">Log out</button>
        </ul>
       </div>
     </nav>
-      <div className="w-full p-2 md:p-5 bg-[#767f56] grid justify-items-center shadow-[0_1px_0px_rgba(17,17,26,0.1)]">
-        <div className="w-1/3 lg:w-1/5 drop-shadow-lg"></div>
-        <Search />
-      </div>
     </>
   );
 };

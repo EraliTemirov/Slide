@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
-import ListsSurah from "../components/surah/ListsSurah";
 import Header from "../components/Header";
 import mainApiInstance from "../components/mainApiInstance";
+import { SearchBar } from "../components/SearchBar";
+import { SearchResultsList } from "../components/SearchResultsList";
 
 const HomePage: React.FC = () => {
+  const [results, setResults] = useState([]);
   const [userData, setUserData] = useState<any>(null);
+
 
   async function fetchData() {
     try {
@@ -18,7 +21,6 @@ const HomePage: React.FC = () => {
       console.log(error);
     }
   }
-
   useEffect(() => {
     fetchData();
   }, []);
@@ -26,7 +28,11 @@ const HomePage: React.FC = () => {
   return (
     <>
       <Header userData={userData} />
-      <ListsSurah />
+      <div className="w-full p-2 md:p-5 grid justify-items-center shadow-[0_1px_0px_rgba(48, 48, 73, 0.1)]">
+        <SearchBar setResults={setResults}  />
+        {results && results.length > 0 && <SearchResultsList results={results} />}
+      </div>
+      
     </>
   );
 };
