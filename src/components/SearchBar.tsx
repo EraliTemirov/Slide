@@ -5,24 +5,31 @@ export const SearchBar = ({ setResults }: { setResults: (results: any[]) => void
 
   const [input, setInput] = useState<string>("");
 
-  const fetchData = async (value: string): Promise<void> => {
+  const fetchData = async (value: string,page:number = 1): Promise<void> => {
     try {
       const response = await mainApiInstance.get(
-        `/prezentations/search?page=${1}&limit=12&search=${value}`
+        `/prezentations/search?page=${page}&limit=16&search=${value}`
       );
       const data = response.data.data;
-      console.log(response.data);
+      console.log(data,"Erali",value);
       
-      const results = data.filter((user: any) => {
-        return (
-          value &&
-          user &&
-          user.name &&
-          user.name.toLowerCase().includes(value)
-        );
+      const results = data.map((item: any) => {
+        if( value &&
+          item &&
+          item.name &&
+           (value == "new" ?true:item.name.toLowerCase().includes(value)))
+        {
+          return {
+            ...item,
+            lang:item?.lang || "uz"
+          }
+        }
        
-      });
-      console.log(results);
+      }).filter((items: any)=>items);
+
+
+      
+      console.log(results,"azizjon",value);
       setResults(results);
     } catch (error) {
       console.error(error);
