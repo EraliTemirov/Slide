@@ -28,7 +28,7 @@ export const SearchResult = ({ result }: SearchResultProps): JSX.Element | null 
       setLoading(true);
       const response = await mainApiInstance.get(`/images/${id}`);
       const data = response.data.data;
-      console.log(data);
+      // console.log(data);
       setFetchedData(data);
     } catch (error) {
       console.error(error);
@@ -42,9 +42,10 @@ export const SearchResult = ({ result }: SearchResultProps): JSX.Element | null 
   }
 
   return (
-    <div className="search-result-link border border-x-2 rounded-lg w-[350px] shadow-lg transition-all duration-400 hover:scale-110">
+    <div className="search-result-link border border-x-2 rounded-lg w-[350px] shadow-lg transition-all duration-400 hover:scale-110 ">
         <Link
-          to={`/prezentations/${result.id}`}
+          to={`/prezentations/${result.id}` }
+         className="h-ful"
         >
           {loading ? (
         <PlaceholderCards />
@@ -53,10 +54,10 @@ export const SearchResult = ({ result }: SearchResultProps): JSX.Element | null 
 
 
           <div className="image-container w-full rounded-sm">
-            <img src={fetchedData?.image} alt="Presentation" />
+            <img src={fetchedData?.image} alt="Presentation"  className="w-full rounded-sm"/>
           </div>
       )}
-          <hr />
+          <hr className="mt-1" />
           <div className="info p-4 bottom-0">
             <h4 className="text-sm">
               <span className="font-bold">Name:</span>{" "}

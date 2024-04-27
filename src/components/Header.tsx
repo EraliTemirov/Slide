@@ -10,7 +10,7 @@ const Header: React.FC<HeaderProps> = (props) => {
 
   const navigate= useNavigate();
   const { userData } = props;
-//  console.log(userData);
+ console.log(userData , "kerak");
   const [isOpen, setIsOpen] = useState(false)
 
   const toggleNavbar = () => {
@@ -23,7 +23,7 @@ const Header: React.FC<HeaderProps> = (props) => {
     try {
       const res = await mainApiInstance.get("/auth/logout");
       if (res.status === 200) {
-        console.log(res)
+        // console.log(res)
         alert(res?.data?.message);
         navigate("/");
       }
@@ -82,13 +82,21 @@ const Header: React.FC<HeaderProps> = (props) => {
           </div>
         </div>
       </div>
-      <div className={` ${isOpen ? 'block' : 'hidden'}`}>
-       <ul className="pt-1 bg-white max-w-8xl mx-auto px-4 sm:px-6 lg:px-8'">
-        <li>Balance: {userData?.data.balance}</li>
-        <li>Name: {userData?.data.name}</li>
-        <button onClick={handleLogout} className="p-1 ">Log out</button>
-       </ul>
-      </div>
+
+      <div className={`${isOpen ? 'block' : 'hidden'}`}>
+      {userData === null ? (
+  <ul className="pt-1 bg-[#f7f4f4] max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">
+    <li className="w-full text-left p-1 hover:bg-gray-200">
+      <a href="https://t.me/cucucucucvot_bot" className="block">Log in</a> </li>
+    </ul>
+) : (
+    <ul className="pt-1 bg-[#f7f4f4] max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">
+      <li className="w-full text-left p-1 hover:bg-gray-200">Balance: {userData?.data.balance}</li>
+      <li className="w-full text-left p-1 hover:bg-gray-200">Name: {userData?.data.name}</li>
+      <button onClick={handleLogout} className="w-full text-left p-1 hover:bg-gray-200 active:bg-gray-300">Log out</button>
+    </ul>
+)}   
+</div>
     </nav>
     </>
   );

@@ -1,5 +1,6 @@
-import React from "react";
+// import React from "react";
 import { BiChevronUp } from "react-icons/bi";
+// import { SearchResult } from "./SearchResult";
 
 const scrollToTop = () => {
   window.scrollTo({
@@ -8,9 +9,13 @@ const scrollToTop = () => {
   });
 };
 
-const Footer: React.FC<{ className: string }> = ({ className }) => {
+
+ const Footer = ({ results }: { results: any }): JSX.Element => {
+  
   return (
-    <footer className={`w-full bottom-0 pt-8 ${className} `}>
+    <footer className={`w-full bottom-0 pt-8  ${
+      results === 200 ? "mt-[10vh]" : " "
+    }`}>
       <div className=" bg-white p-7 border shadow-md md:mt-14 flex justify-between items-center">
         <h1 className="font-semibold text-[18px] text-slate-600">
           Magic App
@@ -31,4 +36,4 @@ const Footer: React.FC<{ className: string }> = ({ className }) => {
   );
 };
 
-export default Footer;
+export default  Footer

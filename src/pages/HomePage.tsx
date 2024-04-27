@@ -15,7 +15,7 @@ const HomePage: React.FC = () => {
     try {
       const res = await mainApiInstance.get("/auth/me");
       if (res.status === 200) {
-        // console.log(res);
+        console.log(res);
         setUserData(res.data); 
         localStorage.setItem("token", res.data.token);
       }
@@ -34,6 +34,7 @@ const HomePage: React.FC = () => {
         <SearchBar setResults={setResults}  />
         {results && results.length > 0 && <SearchResultsList results={results} />}
       </div>
+
       <Footer className="bottom-0"/>
     </>
   );
