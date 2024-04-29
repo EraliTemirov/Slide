@@ -8,7 +8,7 @@ export const SearchBar = ({ setResults }: { setResults: (results: any[]) => void
   const fetchData = async (value: string,page:number = 1): Promise<void> => {
     try {
       const response = await mainApiInstance.get(
-        `/prezentations/search?page=${page}&limit=16&search=${value}`
+        `/prezentations/search?page=${page}&limit=15&search=${value}`
       );
       const data = response.data.data;
       console.log(data,"Erali",value);

@@ -29,7 +29,7 @@ const scrollToTop = () => {
       </div>
       <div className="sm:block hidden px-4 py-3 bg-[#656d4a]">
         <span className="text-sm text-slate-300 flex text-center font-semibold items-center justify-center">
-          © 2024 <a href="#">Magic App</a>.T
+          © 2024 <a href="#">Magic App</a>.Temirov
         </span>
       </div>
     </footer>
