@@ -9,7 +9,7 @@ const PlaceholderCards = () => {
           <div
             role='status'
             key={index}
-            className='max-w-sm p-4 border border-gray-200 rounded shadow animate-pulse md:p-6 dark:border-gray-700 w-[330px] h-[220px]  transition-all duration-400'
+            className='max-w-sm p-4 border border-gray-200 rounded shadow animate-pulse md:p-6  w-[330px] h-[220px]  transition-all duration-400'
           >
             <div className='flex items-center justify-center h-48 mb-4 bg-gray-300 rounded dark:bg-gray-400'>
               <svg

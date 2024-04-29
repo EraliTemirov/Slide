@@ -21,7 +21,7 @@ export const SearchResult = ({result}: SearchResultProps): JSX.Element | null =>
     if (result?.id) {
       fetchData(result.id)
     }
-  }, [])
+  }, [result.id])
 
   const fetchData = async (id: number) => {
     try {
