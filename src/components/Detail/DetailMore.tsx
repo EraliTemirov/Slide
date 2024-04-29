@@ -27,15 +27,15 @@ export default function DetailMore() {
   console.log(data, 'supermen')
   return (
     <div>
-      <div className='w-[90%] m-auto'>
+      <div className='w-[1024px] m-auto'>
         <div className='textr'>
           <h2 className='text-center text-4xl mt-4'>
             O'zbekiston Respublikasi Raqamli texnologiyalari vazirligi Muhammad al-Xorazmiy nomidagi
             Toshkent axborot texnologiyalari universiteti
           </h2>
 
-          <img src={IMG} alt='img' className='w-[30%]  m-auto ' />
-          <p className='text-center text-3xl mt-3'>{data?.name}</p>
+          <img src={IMG} alt='img' className='w-[30%]  mx-auto  mt-8' />
+          <p className='text-center text-3xl mt-10'>{data?.name}</p>
         </div>
         <div className='text-right'>
           <p>
