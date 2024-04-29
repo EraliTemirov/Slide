@@ -1,17 +1,13 @@
-import React, {useEffect, useState} from 'react'
+import {useEffect, useState} from 'react'
 import mainApiInstance from '../mainApiInstance'
 import {useParams} from 'react-router-dom'
 import IMG from '../../assets/react.svg'
 
-interface Params {
-  id: string
-}
-
 export default function DetailMore() {
-  const {id} = useParams<Params>()
+  const {id} = useParams()
   console.log('salom', id)
 
-  const [data, setData] = useState<any>()
+  const [data, setData] = useState()
 
   const fetchData = async (id: string): Promise<void> => {
     try {
@@ -54,12 +50,12 @@ export default function DetailMore() {
         </div>
         <p className='text-center text-2xl mt-10'>2024-yil</p>
         {data?.name}
-        {data?.plans[1]?.name}
+        {data?.plans[1].name}
       </div>
-      <div>{data?.plans[1]?.description[0]?.name}</div>
-      {data?.plans[1]?.description[0]?.content[1]?.title}
+      <div>{data?.plans[1].description[0].name}</div>
+      {data?.plans[1].description[0].content[1].title}
       <hr />
-      {data?.plans[1]?.description[0]?.content[1]?.uzContent}
+      {data?.plans[1].description[0].content[1].uzContent}
     </div>
   )
 }
