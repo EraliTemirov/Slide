@@ -11,7 +11,6 @@ export interface InfoModalRef {
 
 const Modal = forwardRef<InfoModalRef, InfoModalProps>(function Modal({children}, ref) {
   const modal = useRef<HTMLDialogElement | null>(null)
-
   useImperativeHandle(ref, () => ({
     open() {
       if (modal.current) {
