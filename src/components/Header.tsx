@@ -84,7 +84,7 @@ const Header: React.FC<HeaderProps> = (props) => {
             {userData === null ? (
               <ul className='pt-1 bg-[#f7f4f4] max-w-8xl mx-auto px-4 sm:px-6 lg:px-8'>
                 <li className='w-full text-left p-1 hover:bg-gray-200'>
-                  <a href='https://t.me/cucucucucvot_bot' className='block'>
+                  <a href='https://t.me/cucucucucvot_bot' target='_blank' className='block'>
                     Log in
                   </a>{' '}
                 </li>

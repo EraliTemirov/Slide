@@ -12,7 +12,6 @@ interface SearchResultProps {
     image?: string
   }
 }
-
 export const SearchResult = ({result}: SearchResultProps): JSX.Element | null => {
   const [fetchedData, setFetchedData] = useState<{image?: string} | null>(null)
   const [loading, setLoading] = useState(false)
@@ -36,11 +35,9 @@ export const SearchResult = ({result}: SearchResultProps): JSX.Element | null =>
       setLoading(false)
     }
   }
-
   if (!result || !result.id) {
     return null
   }
-
   return (
     <div className='search-result-link border border-x-2 rounded-lg w-[350px] shadow-lg transition-all duration-400 hover:scale-110 '>
       <Link to={`/prezentations/${result.id}`} className='h-ful'>
