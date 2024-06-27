@@ -21,6 +21,7 @@ const HomePage: React.FC = () => {
       console.log(error)
     }
   }
+
   useEffect(() => {
     fetchData()
   }, [])

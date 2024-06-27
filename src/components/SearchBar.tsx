@@ -3,42 +3,60 @@ import mainApiInstance from './mainApiInstance'
 
 export const SearchBar = ({setResults}: {setResults: (results: any[]) => void}): JSX.Element => {
   const [input, setInput] = useState<string>('')
+  const [debouncedInput, setDebouncedInput] = useState<string>('')
 
-  const fetchData = useCallback(async (value: string, page: number = 1): Promise<void> => {
-    try {
-      const response = await mainApiInstance.get(
-        `/prezentations/search?page=${page}&limit=15&search=${value}`
-      )
-      const data = response.data.data
-      console.log(data, 'Erali', value)
+  const fetchData = useCallback(
+    async (value: string, page: number = 1): Promise<void> => {
+      try {
+        const response = await mainApiInstance.get(
+          `/prezentations/search?page=${page}&limit=15&search=${value}`
+        )
+        const data = response.data.data
+        console.log(data, 'Erali', value)
 
-      const results = data
-        .map((item: any) => {
-          if (
-            value &&
-            item &&
-            item.name &&
-            (value == 'new' ? true : item.name.toLowerCase().includes(value))
-          ) {
-            return {
-              ...item,
-              lang: item?.lang || 'uz',
+        const results = data
+          .map((item: any) => {
+            if (
+              value &&
+              item &&
+              item.name &&
+              (value === 'new' ? true : item.name.toLowerCase().includes(value))
+            ) {
+              return {
+                ...item,
+                lang: item?.lang || 'uz',
+              }
             }
-          }
-        })
-        .filter((items: any) => items)
+          })
+          .filter((items: any) => items)
 
-      console.log(results, 'azizjon', value)
-      setResults(results)
-    } catch (error) {
-      console.error(error)
-    }
-  })
+        console.log(results, 'azizjon', value)
+        setResults(results)
+      } catch (error) {
+        console.error(error)
+      }
+    },
+    [setResults]
+  )
 
   const handleChange = (value: string): void => {
     setInput(value)
-    fetchData(value)
+    if (value.length >= 3 || value.length === 0) {
+      setDebouncedInput(value)
+    }
   }
+
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      if (debouncedInput.length >= 3 || debouncedInput.length === 0) {
+        fetchData(debouncedInput)
+      }
+    }, 300)
+
+    return () => {
+      clearTimeout(handler)
+    }
+  }, [debouncedInput, fetchData])
 
   useEffect(() => {
     fetchData('new')

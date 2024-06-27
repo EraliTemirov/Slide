@@ -7,7 +7,8 @@ export default function DetailMore() {
   const {id} = useParams()
   console.log('salom', id)
 
-  const [data, setData] = useState()
+  const [data, setData] = useState<any>(null)
+  const [error, setError] = useState<Error | null>(null)
 
   const fetchData = async (id: string): Promise<void> => {
     try {
@@ -16,15 +17,27 @@ export default function DetailMore() {
       setData(data)
       console.log(data)
     } catch (error) {
+      setError(error as Error)
       console.error(error)
     }
   }
 
   useEffect(() => {
-    fetchData(String(id))
+    if (id) {
+      fetchData(id)
+    }
   }, [id])
 
   console.log(data, 'supermen')
+
+  if (error) {
+    return <div>Error fetching data: {error.message}</div>
+  }
+
+  if (!data) {
+    return <div>Loading...</div>
+  }
+
   return (
     <div>
       <div className='w-[1024px] m-auto'>
@@ -34,8 +47,8 @@ export default function DetailMore() {
             Toshkent axborot texnologiyalari universiteti
           </h2>
 
-          <img src={IMG} alt='img' className='w-[30%]  mx-auto  mt-8' />
-          <p className='text-center text-3xl mt-10'>{data?.name}</p>
+          <img src={IMG} alt='img' className='w-[30%] mx-auto mt-8' />
+          <p className='text-center text-3xl mt-10'>{data.name}</p>
         </div>
         <div className='text-right'>
           <p>
@@ -49,13 +62,17 @@ export default function DetailMore() {
           </p>
         </div>
         <p className='text-center text-2xl mt-10'>2024-yil</p>
-        {data?.name}
-        {data?.plans[1].name}
+        {data.name && <p>{data.name}</p>}
+        {data.plans?.[1]?.name && <p>{data.plans[1].name}</p>}
       </div>
-      <div>{data?.plans[1].description[0].name}</div>
-      {data?.plans[1].description[0].content[1].title}
+      {data.plans?.[1]?.description?.[0]?.name && <div>{data.plans[1].description[0].name}</div>}
+      {data.plans?.[1]?.description?.[0]?.content?.[1]?.title && (
+        <p>{data.plans[1].description[0].content[1].title}</p>
+      )}
       <hr />
-      {data?.plans[1].description[0].content[1].uzContent}
+      {data.plans?.[1]?.description?.[0]?.content?.[1]?.uzContent && (
+        <p>{data.plans[1].description[0].content[1].uzContent}</p>
+      )}
     </div>
   )
 }
