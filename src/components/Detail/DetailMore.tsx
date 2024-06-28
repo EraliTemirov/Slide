@@ -1,9 +1,12 @@
+import Reveal from 'reveal.js'
+import 'reveal.js/dist/reveal.css'
+import 'reveal.js/dist/theme/black.css'
 import {useEffect, useState} from 'react'
 import mainApiInstance from '../mainApiInstance'
 import {useParams} from 'react-router-dom'
 import IMG from '../../assets/react.svg'
 
-export default function DetailMore() {
+const DetailMore: React.FC = () => {
   const {id} = useParams()
   console.log('salom', id)
 
@@ -76,3 +79,5 @@ export default function DetailMore() {
     </div>
   )
 }
+
+export default DetailMore

@@ -23,7 +23,7 @@ const Reveall: React.FC = () => {
           deckRef.current = null
         }
       } catch (e) {
-        console.warn('Reveal.js destroy call failed.', e)
+        console.warn('Reveal.js destroy call failed.', e, 'IShlayabdi')
       }
     }
   }, [])
