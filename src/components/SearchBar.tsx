@@ -41,7 +41,7 @@ export const SearchBar = ({setResults}: {setResults: (results: any[]) => void}):
 
   const handleChange = (value: string): void => {
     setInput(value)
-    if (value.length >= 3 || value.length === 0) {
+    if (value.length >= 4 || value.length === 0) {
       setDebouncedInput(value)
     }
   }
