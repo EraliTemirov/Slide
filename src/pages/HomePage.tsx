@@ -32,7 +32,7 @@ const HomePage: React.FC = () => {
         <SearchBar setResults={setResults} />
         <SearchResultsList results={results} />
       </div>
-      <Footer />
+      <Footer results={undefined} />
     </>
   )
 }
