@@ -12,25 +12,17 @@ export const SearchBar = ({setResults}: {setResults: (results: any[]) => void}):
           `/prezentations/search?page=${page}&limit=15&search=${value}`
         )
         const data = response.data.data
-        console.log(data, 'Erali', value)
 
         const results = data
-          .map((item: any) => {
-            if (
-              value &&
-              item &&
-              item.name &&
-              (value === 'new' ? true : item.name.toLowerCase().includes(value))
-            ) {
-              return {
-                ...item,
-                lang: item?.lang || 'uz',
-              }
-            }
-          })
-          .filter((items: any) => items)
+          .filter(
+            (item: any) =>
+              value === 'new' || item?.name?.toLowerCase().includes(value.toLowerCase())
+          )
+          .map((item: any) => ({
+            ...item,
+            lang: item?.lang || 'uz',
+          }))
 
-        console.log(results, 'azizjon', value)
         setResults(results)
       } catch (error) {
         console.error(error)
@@ -53,9 +45,7 @@ export const SearchBar = ({setResults}: {setResults: (results: any[]) => void}):
       }
     }, 300)
 
-    return () => {
-      clearTimeout(handler)
-    }
+    return () => clearTimeout(handler)
   }, [debouncedInput, fetchData])
 
   useEffect(() => {
@@ -64,12 +54,7 @@ export const SearchBar = ({setResults}: {setResults: (results: any[]) => void}):
 
   return (
     <div className='input-wrapper'>
-      <form
-        onSubmit={(e) => {
-          e.preventDefault()
-        }}
-        className='flex items-center'
-      >
+      <form onSubmit={(e) => e.preventDefault()} className='flex items-center'>
         <label htmlFor='search' className='sr-only'>
           Search
         </label>
@@ -93,8 +78,8 @@ export const SearchBar = ({setResults}: {setResults: (results: any[]) => void}):
           <input
             type='text'
             id='voice-search'
-            className=' border-slate-400 text-[10px] sm:text-sm rounded-2xl focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2 sm:px-10 sm:p-4 bg-[#f4f4f4] placeholder-gray-400 text-slate-500 font-medium'
-            placeholder='Search presintation....'
+            className='border-slate-400 text-[10px] sm:text-sm rounded-2xl focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2 sm:px-10 sm:p-4 bg-[#f4f4f4] placeholder-gray-400 text-slate-500 font-medium'
+            placeholder='Search presentation....'
             required
             value={input}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange(e.target.value)}

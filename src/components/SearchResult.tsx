@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react'
+import {useEffect, useState, useCallback} from 'react'
 import {Link} from 'react-router-dom'
 import mainApiInstance from './mainApiInstance'
 import PlaceholderCards from './PlaseholderCards'
@@ -12,35 +12,37 @@ interface SearchResultProps {
     image?: string
   }
 }
+
 export const SearchResult = ({result}: SearchResultProps): JSX.Element | null => {
   const [fetchedData, setFetchedData] = useState<{image?: string} | null>(null)
   const [loading, setLoading] = useState(false)
 
-  useEffect(() => {
-    if (result?.id) {
-      fetchData(result.id)
-    }
-  }, [result.id])
-
-  const fetchData = async (id: number) => {
+  const fetchData = useCallback(async (id: number) => {
     try {
       setLoading(true)
       const response = await mainApiInstance.get(`/images/${id}`)
       const data = response.data.data
-      // console.log(data);
       setFetchedData(data)
     } catch (error) {
       console.error(error)
     } finally {
       setLoading(false)
     }
-  }
+  }, [])
+
+  useEffect(() => {
+    if (result?.id) {
+      fetchData(result.id)
+    }
+  }, [result.id, fetchData])
+
   if (!result || !result.id) {
     return null
   }
+
   return (
-    <div className='search-result-link border border-x-2 rounded-lg w-[350px] shadow-lg transition-all duration-400 hover:scale-110 '>
-      <Link to={`/prezentations/${result.id}`} className='h-ful'>
+    <div className='search-result-link border border-x-2 rounded-lg w-[350px] shadow-lg transition-all duration-400 hover:scale-110'>
+      <Link to={`/prezentations/${result.id}`} className='h-full'>
         {loading ? (
           <PlaceholderCards />
         ) : (
@@ -53,7 +55,7 @@ export const SearchResult = ({result}: SearchResultProps): JSX.Element | null =>
           </div>
         )}
         <hr className='mt-1' />
-        <div className='info p-4 bottom-0'>
+        <div className='info p-4'>
           <h4 className='text-sm'>
             <span className='font-bold'>Name:</span>{' '}
             {result.name.length > 30 ? `${result.name.slice(0, 30)}...` : result.name}

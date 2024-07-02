@@ -1,12 +1,23 @@
+import {SearchResult} from './SearchResult'
 
-import { SearchResult } from "./SearchResult";
+interface Result {
+  id: number
+  name: string
+  pagesCount: number
+  lang: string
+  image?: string
+}
 
-export const SearchResultsList = ({ results }: { results: string[] }): JSX.Element => {
+interface SearchResultsListProps {
+  results: Result[]
+}
+
+export const SearchResultsList = ({results}: SearchResultsListProps): JSX.Element => {
   return (
-    <div className="results-list  flex justify-center flex-wrap gap-5 mt-8">
-    {results.map((result: any, id: number) => {
-      return <SearchResult result={result} key={id} />;
-    })}
-  </div>
-  );
-};
+    <div className='results-list flex justify-center flex-wrap gap-5 mt-8'>
+      {results.map((result: Result) => (
+        <SearchResult result={result} key={result.id} />
+      ))}
+    </div>
+  )
+}
