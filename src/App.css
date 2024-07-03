@@ -3,3 +3,13 @@ body {
   color-scheme: light dark;
   background-color: #fbfbfb;
 }
+/* src/styles.css yoki sizning umumiy CSS faylingiz */
+.large-display-only {
+  display: none;
+}
+
+@media (min-width: 453px) {
+  .large-display-only {
+    display: block;
+  }
+}

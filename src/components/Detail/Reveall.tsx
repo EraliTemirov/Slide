@@ -2,20 +2,15 @@ import React, {useEffect, useRef} from 'react'
 import Reveal from 'reveal.js'
 import 'reveal.js/dist/reveal.css'
 import 'reveal.js/dist/theme/black.css'
-
 const Reveall: React.FC = () => {
   const deckDivRef = useRef<HTMLDivElement>(null)
   const deckRef = useRef<Reveal.Api | null>(null)
-
   useEffect(() => {
     if (deckRef.current) return
-
     deckRef.current = new Reveal(deckDivRef.current!, {
       transition: 'slide',
     })
-
     deckRef.current.initialize().then(() => {})
-
     return () => {
       try {
         if (deckRef.current) {
@@ -27,7 +22,6 @@ const Reveall: React.FC = () => {
       }
     }
   }, [])
-
   return (
     <div className='reveal' ref={deckDivRef}>
       <div className='slides'>
@@ -37,5 +31,4 @@ const Reveall: React.FC = () => {
     </div>
   )
 }
-
 export default Reveall
