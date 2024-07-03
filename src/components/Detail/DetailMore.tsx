@@ -44,7 +44,7 @@ const DetailMore: React.FC = () => {
   }
 
   return (
-    <div className='reveal large-display-only'>
+    <div className='reveal'>
       <div className='slides'>
         <section className='p-4 md:p-8'>
           <div className='textr text-center'>
