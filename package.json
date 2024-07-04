@@ -20,6 +20,7 @@
     "react-js-pagination": "^3.0.3",
     "react-paginate": "^8.2.0",
     "react-redux": "^9.1.1",
+    "react-reveal-slides": "github:bouzidanas/react-reveal-slides",
     "react-router-dom": "^6.21.1",
     "react-toastify": "^10.0.5",
     "redux": "^5.0.1",
