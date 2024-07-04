@@ -99,8 +99,23 @@ const DetailMore: React.FC = () => {
           <p className="text-center text-lg md:text-2xl mt-10">2024-yil</p>
         </section>
         {data?.plans?.map((plan: any, index: number) => (
-          <section key={index}>
+          <section key={index} data-background-color="#0c1821">
             <h3 className="text-xl md:text-2xl">{plan.name}</h3>
+            <div>
+              {" "}
+              {plan.description?.map((desc: any, descIndex: number) => (
+                <ul key={descIndex} className="mt-4">
+                  {desc.content?.map((content: any, contentIndex: number) => (
+                    <li key={contentIndex} className="mt-2 fragment">
+                      <h5 className="text-base md:text-lg">{content.title}</h5>
+                      <p className="text-sm md:text-base">
+                        {content.uzContent}
+                      </p>
+                    </li>
+                  ))}
+                </ul>
+              ))}
+            </div>
           </section>
         ))}
       </div>
