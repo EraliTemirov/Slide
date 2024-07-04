@@ -1,7 +1,7 @@
 body {
   /* font-family: "Scheherazade New", serif; */
-  color-scheme: light dark;
-  background-color: #fbfbfb;
+  /* color-scheme: light dark;
+  background-color: #fbfbfb; */
 }
 /* src/styles.css yoki sizning umumiy CSS faylingiz */
 .large-display-only {
@@ -13,3 +13,4 @@ body {
     display: block;
   }
 }
+/* src/styles.css yoki sizning umumiy CSS faylingiz */
