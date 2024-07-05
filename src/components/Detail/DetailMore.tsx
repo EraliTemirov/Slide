@@ -6,14 +6,14 @@ import mainApiInstance from '../mainApiInstance'
 import {useParams} from 'react-router-dom'
 import RevealNotes from 'reveal.js/plugin/notes/notes'
 import RevealZoom from 'reveal.js/plugin/zoom/zoom'
-import './DetailMore.css' // Yangi CSS faylini import qilish
+import './DetailMore.css'
 
 const DetailMore: React.FC = () => {
   const {id} = useParams<{id: string}>()
   const [data, setData] = useState<any>(null)
   const [error, setError] = useState<Error | null>(null)
-  const deckDivRef = useRef<HTMLDivElement>(null) // reference to deck container div
-  const deckRef = useRef<Reveal.Api | null>(null) // reference to deck reveal instance
+  const deckDivRef = useRef<HTMLDivElement>(null)
+  const deckRef = useRef<Reveal.Api | null>(null)
 
   const fetchData = async (id: string): Promise<void> => {
     try {
@@ -43,9 +43,7 @@ const DetailMore: React.FC = () => {
       plugins: [RevealZoom, RevealNotes],
     })
 
-    deckRef.current.initialize().then(() => {
-      // good place for event handlers and plugin setups
-    })
+    deckRef.current.initialize().then(() => {})
 
     return () => {
       try {
