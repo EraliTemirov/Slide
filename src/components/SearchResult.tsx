@@ -41,26 +41,25 @@ export const SearchResult = ({result}: SearchResultProps): JSX.Element | null =>
   }
 
   return (
-    <div className='search-result-link border border-x-2 rounded-lg w-[350px] shadow-lg transition-all duration-400 hover:scale-110'>
+    <div className='search-result-link border border-x-2 rounded-lg w-[350px] shadow-lg transition-all duration-400 hover:scale-105 hover:shadow-2xl bg-white'>
       <Link to={`/prezentations/${result.id}`} className='h-full'>
         {loading ? (
           <PlaceholderCards />
         ) : (
-          <div className='image-container w-full rounded-sm'>
+          <div className='image-container w-full rounded-t-lg overflow-hidden'>
             <img
               src={fetchedData?.image}
               alt='Presentation'
-              className='w-full rounded-sm h-[220px]'
+              className='w-full h-[220px] object-cover'
             />
           </div>
         )}
-        <hr className='mt-1' />
         <div className='info p-4'>
-          <h4 className='text-sm'>
+          <h4 className='text-lg font-semibold mb-2'>
             <span className='font-bold'>Name:</span>{' '}
             {result.name.length > 30 ? `${result.name.slice(0, 30)}...` : result.name}
           </h4>
-          <p className='text-sm'>
+          <p className='text-sm mb-1'>
             <span className='font-bold'>Page count:</span> {result.pagesCount}
           </p>
           <p className='text-sm'>

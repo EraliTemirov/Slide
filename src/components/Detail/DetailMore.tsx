@@ -1,11 +1,11 @@
 import React, {useEffect, useRef, useState} from 'react'
 import Reveal from 'reveal.js'
-import 'reveal.js/dist/reveal.css'
-import 'reveal.js/dist/theme/black.css'
 import mainApiInstance from '../mainApiInstance'
 import {useParams} from 'react-router-dom'
 import RevealNotes from 'reveal.js/plugin/notes/notes'
 import RevealZoom from 'reveal.js/plugin/zoom/zoom'
+import 'reveal.js/dist/reveal.css'
+import 'reveal.js/dist/theme/black.css'
 import './DetailMore.css'
 
 const DetailMore: React.FC = () => {
