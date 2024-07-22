@@ -1,174 +1,102 @@
-import React, {useEffect, useLayoutEffect, useRef, useState} from 'react'
-import Reveal from 'reveal.js'
-import mainApiInstance from '../mainApiInstance'
+import React, {useState, useEffect, useRef} from 'react'
 import {useParams} from 'react-router-dom'
-import RevealNotes from 'reveal.js/plugin/notes/notes'
-import RevealZoom from 'reveal.js/plugin/zoom/zoom'
-import 'reveal.js/dist/reveal.css'
-import 'reveal.js/dist/theme/black.css'
-import './DetailMore.css'
+import PresentationComponent from './PresentationComponent'
+import InfoComponent from './InfoComponent'
+import {Maximize2, Minimize2} from 'lucide-react'
 
-interface Content {
-  title: string
-  content: string
+const localPresentationData = {
+  name: 'Prezentatsiya Nomi',
+  description:
+    'Bu prezentatsiya tavsifi. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Libero mollitia maiores soluta ratione eaque id! Deleniti eaque eum accusamus quasi, tempora odio eius excepturi voluptas deserunt sed magni, suscipit totam.',
+  likes: 120,
+  dislikes: 5,
+  views: 3000,
+  plans: [
+    {
+      name: 'Reja 1',
+      description: [
+        {
+          content: [
+            {title: 'Kontent 1.1', content: 'Kontent 1.1 tafsilotlari'},
+            {title: 'Kontent 1.2', content: 'Kontent 1.2 tafsilotlari'},
+          ],
+        },
+      ],
+    },
+    {
+      name: 'Reja 2',
+      description: [
+        {
+          content: [
+            {title: 'Kontent 2.1', content: 'Kontent 2.1 tafsilotlari'},
+            {title: 'Kontent 2.2', content: 'Kontent 2.2 tafsilotlari'},
+          ],
+        },
+      ],
+    },
+  ],
 }
-
-interface Description {
-  content: Content[]
-}
-
-interface Plan {
-  name: string
-  description: Description[]
-}
-
-interface PresentationData {
-  name: string
-  plans: Plan[]
-  description: string
-  likes: number
-  dislikes: number
-  views: number
-}
-
-interface PresentationComponentProps {
-  data: PresentationData | null
-  deckDivRef: React.RefObject<HTMLDivElement>
-}
-
-const PresentationComponent: React.FC<PresentationComponentProps> = ({data, deckDivRef}) => (
-  <div className='reveal' ref={deckDivRef}>
-    <div className='slides'>
-      <section>
-        <div className='textr text-center'>
-          <h4>
-            O'zbekiston Respublikasi Raqamli texnologiyalari vazirligi Muhammad al-Xorazmiy nomidagi
-            Toshkent axborot texnologiyalari universiteti
-          </h4>
-          <p className='text-xl md:text-3xl mt-10'>{data?.name}</p>
-        </div>
-        <div className='text-right mt-4 md:mt-8'>
-          <p>
-            x<span>Gurux:</span> 124
-          </p>
-          <p>
-            <span>Bajardi:</span> Kimdir
-          </p>
-          <p>
-            <span>Tekshirdi:</span> Boshqasi
-          </p>
-        </div>
-        <p className='text-center text-lg md:text-2xl mt-10'>2024-yil</p>
-      </section>
-      {data?.plans?.map((plan: Plan, index: number) => (
-        <section key={index} data-background-color='#0c1821'>
-          <h3 className='text-xl md:text-2xl mt-2'>{plan.name}</h3>
-          <div className='flex justify-between'>
-            {plan.description?.map((desc: Description, descIndex: number) => (
-              <ul key={descIndex} className='mt-4 flex w-[50%]'>
-                {desc.content?.map((content: Content, contentIndex: number) => (
-                  <li key={contentIndex} className='mt-2 fragment flex'>
-                    <h5 className='text-base md:text-lg'>{content.title}</h5>
-                    <p className='text-sm md:text-base'>{content.content}</p>
-                  </li>
-                ))}
-              </ul>
-            ))}
-          </div>
-        </section>
-      ))}
-    </div>
-  </div>
-)
-
-interface InfoComponentProps {
-  data: PresentationData | null
-}
-
-const InfoComponent: React.FC<InfoComponentProps> = ({data}) => (
-  <div className='info-content'>
-    <h2 className='text-2xl font-bold mb-4'>{data?.name}</h2>
-    <p className='mb-4'>{data?.description}</p>
-    <div className='flex justify-between items-center'>
-      <div>
-        <span className='mr-2'>👍 {data?.likes || 0}</span>
-        <span>👎 {data?.dislikes || 0}</span>
-      </div>
-      <div>
-        <span>👁️ {data?.views || 0} views</span>
-      </div>
-    </div>
-  </div>
-)
 
 const DetailMore: React.FC = () => {
   const {id} = useParams<{id: string}>()
-  const [data, setData] = useState<PresentationData | null>(null)
-  const [error, setError] = useState<Error | null>(null)
-  const deckDivRef = useRef<HTMLDivElement>(null)
-  const deckRef = useRef<Reveal.Api | null>(null)
-
-  const fetchData = async (id: string): Promise<void> => {
-    try {
-      const response = await mainApiInstance.get(`/prezentations/${id}`)
-      const fetchedData: PresentationData = response.data.data
-      setData(fetchedData)
-    } catch (err) {
-      setError(err as Error)
-      console.error(err)
-    }
-  }
+  const [data, setData] = useState(localPresentationData)
+  const [isFullscreen, setIsFullscreen] = useState(false)
+  const presentationRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    if (id) {
-      fetchData(id)
-    }
+    setData(localPresentationData)
   }, [id])
 
-  useLayoutEffect(() => {
-    if (!data || deckRef.current) return
-
-    const initReveal = () => {
-      if (deckDivRef.current) {
-        deckRef.current = new Reveal(deckDivRef.current, {
-          view: 'scroll',
-          transition: 'slide',
-          center: true,
-          plugins: [RevealZoom, RevealNotes],
-          width: '100%',
-          height: '100%',
-        })
-
-        deckRef.current.initialize().then(() => {
-          window.dispatchEvent(new Event('resize'))
-        })
-      }
+  useEffect(() => {
+    const handleFullscreenChange = () => {
+      setIsFullscreen(!!document.fullscreenElement)
     }
 
-    initReveal()
-
+    document.addEventListener('fullscreenchange', handleFullscreenChange)
     return () => {
-      if (deckRef.current) {
-        deckRef.current.destroy()
-        deckRef.current = null
-      }
+      document.removeEventListener('fullscreenchange', handleFullscreenChange)
     }
-  }, [data])
+  }, [])
 
-  if (error) {
-    return <div>Error fetching data: {error.message}</div>
-  }
+  const toggleFullscreen = async () => {
+    if (!presentationRef.current) return
 
-  if (!data) {
-    return <div>Loading...</div>
+    try {
+      if (!document.fullscreenElement) {
+        if (presentationRef.current.requestFullscreen) {
+          await presentationRef.current.requestFullscreen()
+        } else if ((presentationRef.current as any).webkitRequestFullscreen) {
+          await (presentationRef.current as any).webkitRequestFullscreen()
+        } else if ((presentationRef.current as any).msRequestFullscreen) {
+          await (presentationRef.current as any).msRequestFullscreen()
+        }
+      } else {
+        if (document.exitFullscreen) {
+          await document.exitFullscreen()
+        } else if ((document as any).webkitExitFullscreen) {
+          await (document as any).webkitExitFullscreen()
+        } else if ((document as any).msExitFullscreen) {
+          await (document as any).msExitFullscreen()
+        }
+      }
+    } catch (error) {
+      console.error('Fullscreen toggle failed:', error)
+    }
   }
 
   return (
-    <div className='detail-more-container'>
-      <div className='presentation-container'>
-        <PresentationComponent data={data} deckDivRef={deckDivRef} />
+    <div className='detail-more-container h-screen grid grid-rows-[65%_35%]'>
+      <div className='presentation-container relative overflow-hidden' ref={presentationRef}>
+        <PresentationComponent data={data} isFullscreen={isFullscreen} />
+        <div className='absolute bottom-4 left-1/2 transform -translate-x-1/2 flex items-center space-x-2 z-10'>
+          <button className='p-2 bg-gray-800 text-white rounded-full'>&lt;</button>
+          <button className='p-2 bg-gray-800 text-white rounded-full' onClick={toggleFullscreen}>
+            {isFullscreen ? <Minimize2 size={20} /> : <Maximize2 size={20} />}
+          </button>
+          <button className='p-2 bg-gray-800 text-white rounded-full'>&gt;</button>
+        </div>
       </div>
-      <div className='info-container'>
+      <div className='info-container overflow-y-auto bg-gray-100'>
         <InfoComponent data={data} />
       </div>
     </div>

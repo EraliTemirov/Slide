@@ -36,7 +36,7 @@ const HomePage: React.FC = () => {
           <SearchResultsList results={results} />
         </div>
       </div>
-      <Footer />
+      <Footer results={undefined} />
     </>
   )
 }

@@ -1,9 +1,18 @@
-.large-display-only {
-  display: none;
+.detail-more-container {
+  display: grid;
+  grid-template-rows: 70% 30%;
+  height: 100vh;
 }
 
-@media (min-width: 453px) {
-  .large-display-only {
-    display: block;
-  }
+.presentation-container {
+  overflow: hidden;
+}
+
+.info-container {
+  overflow-y: auto;
+  background-color: #f3f4f6;
+}
+
+.reveal .slides section {
+  height: 100%;
 }
