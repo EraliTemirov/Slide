@@ -85,15 +85,13 @@ const DetailMore: React.FC = () => {
   }
 
   return (
-    <div className='detail-more-container h-screen grid grid-rows-[65%_35%]'>
+    <div className='detail-more-container h-screen grid grid-rows-[70%_30%]'>
       <div className='presentation-container relative overflow-hidden' ref={presentationRef}>
         <PresentationComponent data={data} isFullscreen={isFullscreen} />
-        <div className='absolute bottom-4 left-1/2 transform -translate-x-1/2 flex items-center space-x-2 z-10'>
-          <button className='p-2 bg-gray-800 text-white rounded-full'>&lt;</button>
+        <div className='absolute bottom-1 left-1/2 transform -translate-x-1/2 flex items-center space-x-2 z-10'>
           <button className='p-2 bg-gray-800 text-white rounded-full' onClick={toggleFullscreen}>
             {isFullscreen ? <Minimize2 size={20} /> : <Maximize2 size={20} />}
           </button>
-          <button className='p-2 bg-gray-800 text-white rounded-full'>&gt;</button>
         </div>
       </div>
       <div className='info-container overflow-y-auto bg-gray-100'>

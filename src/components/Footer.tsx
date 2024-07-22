@@ -12,7 +12,7 @@ const scrollToTop = () => {
 const Footer = ({results}: {results: any}): JSX.Element => {
   console.log(results, 'footer')
   return (
-    <footer className={`w-full bottom-0 pt-8  ${results === 200 ? '' : 'mt-[51vh] '}`}>
+    <footer className={`w-full bottom-0 pt-2  ${results === 200 ? '' : 'mt-[41vh] '}`}>
       <div className=' bg-white p-7 border shadow-md md:mt-14 flex justify-between items-center'>
         <h1 className='font-semibold text-[18px] text-slate-600'>Magic App</h1>
         <button
@@ -22,7 +22,7 @@ const Footer = ({results}: {results: any}): JSX.Element => {
           <BiChevronUp size={25} />
         </button>
       </div>
-      <div className='sm:block hidden px-4 py-3 bg-[#656d4a]'>
+      <div className='sm:block hidden px-4 py-3 bg-[#7C4D9B]'>
         <span className='text-sm text-slate-300 flex text-center font-semibold items-center justify-center'>
           © 2024 <a href='#'>Magic App</a>.Temirov
         </span>

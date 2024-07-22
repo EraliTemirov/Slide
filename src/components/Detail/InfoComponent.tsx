@@ -64,18 +64,15 @@ const InfoComponent: React.FC<InfoComponentProps> = ({data}) => {
       )}
 
       {activeTab === 'statistics' && (
-        <div className='text-gray-600 mb-4'>
+        <div className='flex justify-between text-gray-600 mb-4'>
           <div className='flex justify-between items-center mb-4'>
             <div className='flex gap-5'>
               <span className='mr-4 flex items-center'>👍 {data.likes || 0}</span>
               <span className='flex items-center'>👎 {data.dislikes || 0}</span>
             </div>
-            <div>
-              <span className='flex items-center'>👁️ {data.views || 0} ko'rishlar</span>
-            </div>
           </div>
-          <h3 className='text-xl font-semibold mb-2'>Baho:</h3>
-          <div className='flex mb-4'>
+          <div className='flex gap-4 mb-4'>
+            <h3 className='text-xl font-semibold mb-2'>Baho:</h3>
             {[...Array(5)].map((_, index) => {
               const ratingValue = index + 1
               return (
@@ -97,6 +94,9 @@ const InfoComponent: React.FC<InfoComponentProps> = ({data}) => {
                 </label>
               )
             })}
+          </div>
+          <div>
+            <span className='flex items-center'>👁️ {data.views || 0} ko'rishlar</span>
           </div>
         </div>
       )}

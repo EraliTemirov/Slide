@@ -60,8 +60,8 @@ const PresentationComponent: React.FC<PresentationComponentProps> = ({data, isFu
   return (
     <div className={`reveal h-full ${isFullscreen ? 'fullscreen' : ''}`} ref={deckDivRef}>
       <div className='slides'>
-        <section>
-          <div className='text-center'>
+        <section className='mt-2'>
+          <div className='text-center mt-10'>
             <h4 className='text-lg'>
               O'zbekiston Respublikasi Raqamli texnologiyalar vazirligi Muhammad al-Xorazmiy
               nomidagi Toshkent axborot texnologiyalari universiteti
