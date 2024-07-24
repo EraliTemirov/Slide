@@ -22,7 +22,7 @@ const Footer = ({results}: {results: any}): JSX.Element => {
           <BiChevronUp size={25} />
         </button>
       </div>
-      <div className='sm:block hidden px-4 py-3 bg-[#7C4D9B]'>
+      <div className=' px-4 py-3 bg-[#7C4D9B]'>
         <span className='text-sm text-slate-300 flex text-center font-semibold items-center justify-center'>
           © 2024 <a href='#'>Magic App</a>.Temirov
         </span>

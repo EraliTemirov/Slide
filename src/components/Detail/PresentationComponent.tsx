@@ -83,14 +83,14 @@ const PresentationComponent: React.FC<PresentationComponentProps> = ({data, isFu
         </section>
         {data.plans?.map((plan, index) => (
           <section key={index} data-background-color='#0c1821'>
-            <h3 className='text-xl md:text-2xl mt-2'>{plan.name}</h3>
+            <h3 className='text-2xl md:text-2xl mt-2'>{plan.name}</h3>
             <div className='flex flex-wrap'>
               {plan.description?.map((desc, descIndex) => (
-                <ul key={descIndex} className='mt-4 w-full md:w-1/2'>
+                <ul key={descIndex} className='mt-4 w-full md:w-1/2 text-2xl'>
                   {desc.content?.map((content, contentIndex) => (
-                    <li key={contentIndex} className='mt-2 fragment'>
-                      <h5 className='text-base md:text-lg'>{content.title}</h5>
-                      <p className='text-sm md:text-base'>{content.content}</p>
+                    <li key={contentIndex} className='mt-2 fragment text-2xl'>
+                      <h5 className='text-2xl md:text-xl'>{content.title}</h5>
+                      <p className=' text-xl  md:text-base'>{content.content}</p>
                     </li>
                   ))}
                 </ul>

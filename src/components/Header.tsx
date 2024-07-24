@@ -32,16 +32,29 @@ const LoginButton: React.FC = () => (
   </a>
 )
 
-const UserMenu: React.FC<{userData: UserData; onLogout: () => void}> = ({userData, onLogout}) => {
+const UserMenu: React.FC<{userData: UserData; onLogout: () => void; isMobile?: boolean}> = ({
+  userData,
+  onLogout,
+  isMobile = false,
+}) => {
   const [isOpen, setIsOpen] = useState(false)
 
   return (
-    <div className='relative'>
-      <button onClick={() => setIsOpen(!isOpen)} className='flex items-center focus:outline-none'>
-        <p className='w-8 h-8 rounded-full'> User</p>
+    <div className={`relative ${isMobile ? 'w-full' : ''}`}>
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className={`flex items-center focus:outline-none ${
+          isMobile ? 'w-full text-left p-1 hover:bg-gray-200' : 'text-white'
+        }`}
+      >
+        User
       </button>
       {isOpen && (
-        <div className='absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1'>
+        <div
+          className={`${
+            isMobile ? 'relative' : 'absolute right-0'
+          } mt-2 w-48 bg-white rounded-md shadow-lg py-1`}
+        >
           <p className='px-4 py-2 text-sm text-gray-700'>ID: {userData.id}</p>
           <p className='px-4 py-2 text-sm text-gray-700'>Name: {userData.name}</p>
           <p className='px-4 py-2 text-sm text-gray-700'>Age: {userData.account.age}</p>
@@ -180,34 +193,17 @@ const Header: React.FC = () => {
         </div>
         <div className='px-4'>
           <ul className='pt-1'>
-            {userData === null ? (
-              <li className='w-full text-left p-1 hover:bg-gray-200'>
-                <LoginButton />
-              </li>
-            ) : (
-              <>
-                <li className='w-full text-left p-1 hover:bg-gray-200'>ID: {userData.id}</li>
-                <li className='w-full text-left p-1 hover:bg-gray-200'>Name: {userData.name}</li>
-                <li className='w-full text-left p-1 hover:bg-gray-200'>
-                  Age: {userData.account.age}
-                </li>
-                <li className='w-full text-left p-1 hover:bg-gray-200'>
-                  Balance: {userData.account.balance}
-                </li>
-              </>
-            )}
             {navItems.map((item, index) => (
               <li key={index} className='w-full text-left p-1 hover:bg-gray-200 cursor-pointer'>
                 {item}
               </li>
             ))}
-            {userData !== null && (
-              <button
-                onClick={handleLogout}
-                className='w-full text-left p-1 hover:bg-gray-200 active:bg-gray-300'
-              >
-                Log out
-              </button>
+            {userData === null ? (
+              <li className='w-full text-left p-1 hover:bg-gray-200'>
+                <LoginButton />
+              </li>
+            ) : (
+              <UserMenu userData={userData} onLogout={handleLogout} isMobile={true} />
             )}
           </ul>
         </div>
