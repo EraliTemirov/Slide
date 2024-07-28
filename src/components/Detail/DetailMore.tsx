@@ -189,7 +189,7 @@ const DetailMore: React.FC = () => {
         </div>
       </div>
       <div className='info-container overflow-y-auto bg-gray-100'>
-        <InfoComponent data={data} />
+        <InfoComponent dataId={1} userId='user123' />
       </div>
     </div>
   )
